@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baleszko Social Widget</title>
+    <title>Baleszko Social Widget - Twitch First</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap');
@@ -30,12 +30,11 @@
             border-radius: 15px;
             position: relative;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
-            min-width: 350px; /* Kisebb szélesség elég, mert nincs hosszú map kód */
+            min-width: 380px;
             height: 70px;
             animation: floating 4s ease-in-out infinite;
         }
 
-        /* Arany díszcsík az alján és tetején */
         .widget-container::before, .widget-container::after {
             content: '';
             position: absolute;
@@ -63,14 +62,15 @@
             justify-content: center;
             opacity: 0;
             white-space: nowrap;
-            /* 3 elem * 10mp = 30mp teljes kör */
-            animation: cycle-info 30s infinite;
+            /* A teljes körforgás összesen 8 másodperc */
+            animation: cycle-info 8s infinite;
         }
 
-        /* Időzítések (10 másodpercenként) */
+        /* Időzítések (2 másodpercenként vált) */
         .info-slide:nth-child(1) { animation-delay: 0s; }
-        .info-slide:nth-child(2) { animation-delay: 10s; }
-        .info-slide:nth-child(3) { animation-delay: 20s; }
+        .info-slide:nth-child(2) { animation-delay: 2s; }
+        .info-slide:nth-child(3) { animation-delay: 4s; }
+        .info-slide:nth-child(4) { animation-delay: 6s; }
 
         .icon-box {
             font-size: 32px;
@@ -80,10 +80,11 @@
             justify-content: center;
         }
 
-        /* Egyedi színek az ikonoknak */
+        /* Ikon színek */
+        .fa-twitch { color: #9146FF; }
+        .fa-youtube { color: #FF0000; }
         .fa-instagram { color: #E1306C; }
         .fa-tiktok { color: #ffffff; filter: drop-shadow(2px 0px 0px #fd1d1d) drop-shadow(-2px 0px 0px #25f4ee); }
-        .fa-youtube { color: #FF0000; }
 
         .value {
             color: #FFD700;
@@ -96,9 +97,9 @@
 
         @keyframes cycle-info {
             0% { opacity: 0; transform: scale(0.9) translateY(10px); }
-            2% { opacity: 1; transform: scale(1) translateY(0); }
-            31% { opacity: 1; transform: scale(1) translateY(0); }
-            33% { opacity: 0; transform: scale(0.9) translateY(-10px); }
+            5% { opacity: 1; transform: scale(1) translateY(0); }
+            20% { opacity: 1; transform: scale(1) translateY(0); }
+            25% { opacity: 0; transform: scale(0.9) translateY(-10px); }
             100% { opacity: 0; }
         }
 
@@ -118,7 +119,7 @@
             top: 0; left: -150%; width: 30%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transform: skewX(-25deg);
-            animation: sweep 6s infinite;
+            animation: sweep 4s infinite;
         }
         @keyframes sweep {
             0%, 70% { left: -150%; }
@@ -133,6 +134,16 @@
         <div class="content-wrapper">
             
             <div class="info-slide">
+                <div class="icon-box"><i class="fab fa-twitch"></i></div>
+                <span class="value">Baleszkoo</span>
+            </div>
+
+            <div class="info-slide">
+                <div class="icon-box"><i class="fab fa-youtube"></i></div>
+                <span class="value">Baleszko</span>
+            </div>
+
+            <div class="info-slide">
                 <div class="icon-box"><i class="fab fa-instagram"></i></div>
                 <span class="value">baleszko</span>
             </div>
@@ -142,13 +153,15 @@
                 <span class="value">Baleszko</span>
             </div>
 
-            <div class="info-slide">
-                <div class="icon-box"><i class="fab fa-youtube"></i></div>
-                <span class="value">Baleszko</span>
-            </div>
-
         </div>
     </div>
+
+    <script>
+        // Automatikus frissítés 30 percenként
+        setTimeout(function(){
+            location.reload();
+        }, 1800000);
+    </script>
 
 </body>
 </html>
