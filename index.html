@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baleszko Social Widget - Twitch First</title>
+    <title>Baleszko Social Widget - Compact & Bold</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&display=swap');
 
         body {
             margin: 0;
@@ -17,33 +17,25 @@
             align-items: center;
             height: 100vh;
             background: transparent;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         .widget-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(10, 10, 10, 0.85); 
-            border: 1.5px solid rgba(255, 215, 0, 0.5); 
-            padding: 0 40px;
-            border-radius: 15px;
+            background: rgba(10, 10, 14, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0 24px;
+            border-radius: 16px;
             position: relative;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
-            min-width: 380px;
-            height: 70px;
-            animation: floating 4s ease-in-out infinite;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            min-width: 280px;
+            height: 52px; /* Kisebb, kompaktabb magasság */
+            animation: floating 5s ease-in-out infinite;
         }
-
-        .widget-container::before, .widget-container::after {
-            content: '';
-            position: absolute;
-            width: 60%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #FFD700, transparent);
-        }
-        .widget-container::before { top: -1px; }
-        .widget-container::after { bottom: -1px; }
 
         .content-wrapper {
             position: relative;
@@ -59,70 +51,86 @@
             height: 100%;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: center; 
             opacity: 0;
             white-space: nowrap;
-            /* A teljes körforgás összesen 8 másodperc */
-            animation: cycle-info 8s infinite;
+            animation: cycle-info 16s infinite;
         }
 
-        /* Időzítések (2 másodpercenként vált) */
         .info-slide:nth-child(1) { animation-delay: 0s; }
-        .info-slide:nth-child(2) { animation-delay: 2s; }
-        .info-slide:nth-child(3) { animation-delay: 4s; }
-        .info-slide:nth-child(4) { animation-delay: 6s; }
+        .info-slide:nth-child(2) { animation-delay: 4s; }
+        .info-slide:nth-child(3) { animation-delay: 8s; }
+        .info-slide:nth-child(4) { animation-delay: 12s; }
 
         .icon-box {
-            font-size: 32px;
-            margin-right: 20px;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 16px;
+            margin-right: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
-        /* Ikon színek */
-        .fa-twitch { color: #9146FF; }
-        .fa-youtube { color: #FF0000; }
-        .fa-instagram { color: #E1306C; }
-        .fa-tiktok { color: #ffffff; filter: drop-shadow(2px 0px 0px #fd1d1d) drop-shadow(-2px 0px 0px #25f4ee); }
+        .info-slide:nth-child(1) .icon-box { color: #9146FF; border: 1px solid rgba(145, 70, 255, 0.4); }
+        .info-slide:nth-child(2) .icon-box { color: #FF0000; border: 1px solid rgba(255, 0, 0, 0.4); }
+        .info-slide:nth-child(3) .icon-box { color: #E1306C; border: 1px solid rgba(225, 48, 108, 0.4); }
+        .info-slide:nth-child(4) .icon-box { color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.4); }
+
+        .text-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .platform-name {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 1px;
+        }
 
         .value {
-            color: #FFD700;
-            font-size: 28px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+            color: #ffffff;
+            font-size: 16px; /* Nagyobb, jobban látható név */
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         @keyframes cycle-info {
-            0% { opacity: 0; transform: scale(0.9) translateY(10px); }
-            5% { opacity: 1; transform: scale(1) translateY(0); }
-            20% { opacity: 1; transform: scale(1) translateY(0); }
-            25% { opacity: 0; transform: scale(0.9) translateY(-10px); }
+            0% { opacity: 0; transform: translateY(6px); filter: blur(3px); }
+            8% { opacity: 1; transform: translateY(0); filter: blur(0); }
+            22% { opacity: 1; transform: translateY(0); filter: blur(0); }
+            30% { opacity: 0; transform: translateY(-6px); filter: blur(3px); }
             100% { opacity: 0; }
         }
 
         @keyframes floating {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-4px); }
         }
 
         .shine {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            overflow: hidden; border-radius: 15px; pointer-events: none;
+            overflow: hidden; border-radius: 16px; pointer-events: none;
         }
         .shine::after {
             content: '';
             position: absolute;
-            top: 0; left: -150%; width: 30%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: skewX(-25deg);
-            animation: sweep 4s infinite;
+            top: 0; left: -150%; width: 40%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            transform: skewX(-20deg);
+            animation: sweep 6s infinite ease-in-out;
         }
         @keyframes sweep {
-            0%, 70% { left: -150%; }
+            0%, 60% { left: -150%; }
             100% { left: 150%; }
         }
     </style>
@@ -135,29 +143,40 @@
             
             <div class="info-slide">
                 <div class="icon-box"><i class="fab fa-twitch"></i></div>
-                <span class="value">Baleszkoo</span>
+                <div class="text-group">
+                    <span class="platform-name">Twitch</span>
+                    <span class="value">Baleszkoo</span>
+                </div>
             </div>
 
             <div class="info-slide">
                 <div class="icon-box"><i class="fab fa-youtube"></i></div>
-                <span class="value">Baleszko</span>
+                <div class="text-group">
+                    <span class="platform-name">YouTube</span>
+                    <span class="value">Baleszko</span>
+                </div>
             </div>
 
             <div class="info-slide">
                 <div class="icon-box"><i class="fab fa-instagram"></i></div>
-                <span class="value">baleszko</span>
+                <div class="text-group">
+                    <span class="platform-name">Instagram</span>
+                    <span class="value">baleszko</span>
+                </div>
             </div>
 
             <div class="info-slide">
                 <div class="icon-box"><i class="fab fa-tiktok"></i></div>
-                <span class="value">Baleszko</span>
+                <div class="text-group">
+                    <span class="platform-name">TikTok</span>
+                    <span class="value">Baleszko</span>
+                </div>
             </div>
 
         </div>
     </div>
 
     <script>
-        // Automatikus frissítés 30 percenként
         setTimeout(function(){
             location.reload();
         }, 1800000);
